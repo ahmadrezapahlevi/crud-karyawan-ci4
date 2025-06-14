@@ -26,7 +26,7 @@ class Database extends Config
      */
     public array $default = [
         'DSN'          => '',
-        'hostname'     => '0.0.0.0',
+        'hostname'     => '',
         'username'     => 'root',
         'password'     => 'root',
         'database'     => 'karyawan_db',
@@ -42,7 +42,6 @@ class Database extends Config
         'strictOn'     => false,
         'failover'     => [],
         'port'         => 3306,
-        'DBSocket' => '',
         'numberNative' => false,
         'foundRows'    => false,
         'dateFormat'   => [

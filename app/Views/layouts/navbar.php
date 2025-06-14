@@ -14,6 +14,12 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/pegawai">Pegawai</a>
+        </li>
+          <?php if (session()->get('login')): ?>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          <?php endif; ?>
       </ul>
     </div>
   </div>
