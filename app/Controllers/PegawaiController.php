@@ -23,7 +23,8 @@ class PegawaiController extends BaseController
     
     public function show($id)
     {
-        //
+        $data['pegawai'] = $this->modelPegawai->getPegawaiWithJabatanWhere($id);
+      return view('pegawai/show', $data);
     }
     
     public function create()
@@ -41,6 +42,14 @@ class PegawaiController extends BaseController
             'telepon' => $this->request->getPost('telepon'),
             'jabatan_id' => $this->request->getPost('jabatan_id'),
           ];
+          
+          // handle foto
+          $fileFoto = $this->request->getFile('file_foto');
+          if($fileFoto && $fileFoto->isValid() && !$fileFoto->hasMoved()){
+            $namaFile = $fileFoto->getRandomName();
+            $fileFoto->move('uploads', $namaFile);
+            $data['foto_pegawai'] = $namaFile;
+          }
           
           $this->modelPegawai->save($data);
           return redirect()->to('pegawai');
@@ -64,13 +73,41 @@ class PegawaiController extends BaseController
             'jabatan_id' => $this->request->getPost('jabatan_id'),
           ];
           
+          // handle foto
+          $fileFoto = $this->request->getFile('file_foto');
+          if($fileFoto && $fileFoto->isValid() && !$fileFoto->hasMoved()){
+            $namaFile = $fileFoto->getRandomName();
+            $fileFoto->move('uploads', $namaFile);
+            $data['foto_pegawai'] = $namaFile;
+            
+            //hpus fto lama
+            $fotoLama = $this->request->getPost('foto_lama');
+            if(!empty($fotoLama)){
+            $filePath = 'uploads/'. $fotoLama;
+            if(is_file($filePath)){
+              unlink($filePath);
+            }
+          }
+          }
+          
           $this->modelPegawai->save($data);
           return redirect()->to('pegawai');
     }
     
     public function delete($id)
     {
-        $this->modelPegawai->delete($id);
+        // $this->modelPegawai->delete($id);
+        
+        $pegawai = $this->modelPegawai->find($id);
+        if($pegawai){
+          if(!empty($pegawai->foto_pegawai)){
+            $filePath = 'uploads/'. $pegawai->foto_pegawai;
+            if(is_file($filePath)){
+              unlink($filePath);
+            }
+          }
+          $this->modelPegawai->delete($id);
+        }
         return redirect()->to('pegawai');
     }
 }
