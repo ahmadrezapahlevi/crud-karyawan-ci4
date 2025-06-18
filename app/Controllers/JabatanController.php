@@ -32,11 +32,34 @@ class JabatanController extends BaseController
     
     public function store()
     {
+        
+        $rules = [
+            'nama_jabatan' => 'required',
+            'deskripsi_jabatan' => 'required',
+          ];
+          
+        $errors = [
+            'nama_jabatan' => [
+                'required' => 'Nama jabatan wajib diisi.'
+              ],
+            'deskripsi_jabatan' => [
+                'required' => 'Deskripsi jabatan wajib diisi.'
+              ],
+          ];
+        // validsi 
+        $valData = $this->validate($rules, $errors);
+          
+          if(!$valData){
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+          }
+      
+        // nangkep inputan form
         $data = [
             'nama_jabatan' => $this->request->getPost('nama_jabatan'),
             'deskripsi_jabatan' => $this->request->getPost('deskripsi_jabatan'),
           ];
           
+          // nyimpen data
           $this->modelJabatan->save($data);
           return redirect()->to('jabatan');
     }
@@ -49,6 +72,27 @@ class JabatanController extends BaseController
     
     public function update($id)
     {
+      
+        $rules = [
+            'nama_jabatan' => 'required',
+            'deskripsi_jabatan' => 'required',
+          ];
+          
+        $errors = [
+            'nama_jabatan' => [
+                'required' => 'Nama jabatan wajib diisi.'
+              ],
+            'deskripsi_jabatan' => [
+                'required' => 'Deskripsi jabatan wajib diisi.'
+              ],
+          ];
+        // validsi 
+        $valData = $this->validate($rules, $errors);
+          
+          if(!$valData){
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+          }
+          
         $data = [
             'id' => $id,
             'nama_jabatan' => $this->request->getPost('nama_jabatan'),

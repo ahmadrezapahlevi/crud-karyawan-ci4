@@ -17,7 +17,7 @@ class CreatePegawaiTable extends Migration
             ],
             'nama_pegawai' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => 100,
             ],
             'jabatan_id' => [
                 'type'       => 'INT',
@@ -26,7 +26,7 @@ class CreatePegawaiTable extends Migration
             ],
             'alamat' => [
                 'type' => 'VARCHAR',
-                'constraint' => '100',
+                'constraint' => 100,
             ],
             'telepon' => [
                 'type' => 'VARCHAR',

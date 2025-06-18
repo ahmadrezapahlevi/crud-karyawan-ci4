@@ -9,16 +9,31 @@
     <a href="/jabatan" class="btn btn-dark">Kembali</a>
   </div>
   <div class="p-3">
+    <?php if (session('errors')): ?>
+      <div class="alert alert-danger">
+        <ul>
+          <?php foreach (session('errors') as $error): ?>
+            <li><?= esc($error); ?></li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endif; ?>
     <form action="/jabatan/store" method="post">
       <?= csrf_field(); ?>
       <div class="mb-3">
         <label for="" class="form-label">Nama Jabatan:</label>
-        <input type="text" class="form-control" name="nama_jabatan" placeholder="Masukkan nama jabatan">
+        <input type="text" class="form-control <?= isset(session('errors')['nama_jabatan']) ? 'is-invalid' : ''; ?>" name="nama_jabatan" placeholder="Masukkan nama jabatan" value="<?= old('nama_jabatan'); ?>">
+        <div class="invalid-feedback">
+          <?= session('errors.nama_jabatan') ?? ''; ?>
+        </div>
       </div>
       
       <div class="mb-3">
         <label for="" class="form-label">Deskripsi Jabatan:</label>
-        <input type="text" class="form-control" name="deskripsi_jabatan" placeholder="Masukkan deskripsi jabatan">
+        <input type="text" class="form-control <?= isset(session('errors')['deskripsi_jabatan']) ? 'is-invalid' : ''; ?>" name="deskripsi_jabatan" placeholder="Masukkan deskripsi jabatan" value="<?= old('deskripsi_jabatan'); ?>">
+        <div class="invalid-feedback">
+          <?= session('errors.deskripsi_jabatan') ?? ''; ?>
+        </div>
       </div>
       <button type="submit" class="btn btn-dark">Simpan</button>
     </form>

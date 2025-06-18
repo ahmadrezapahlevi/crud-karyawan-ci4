@@ -13,12 +13,18 @@
       <?= csrf_field(); ?>
       <div class="mb-3">
         <label for="" class="form-label">Nama Jabatan:</label>
-        <input type="text" class="form-control" name="nama_jabatan" value="<?= $jabatan->nama_jabatan; ?>">
+        <input type="text" class="form-control <?= isset(session('errors')['nama_jabatan']) ? 'is-invalid' : ''; ?>" name="nama_jabatan" value="<?= $jabatan->nama_jabatan; ?>">
+        <div class="invalid-feedback">
+          <?= session('errors.nama_jabatan') ?? ''; ?>
+        </div>
       </div>
       
       <div class="mb-3">
         <label for="" class="form-label">Deskripsi Jabatan:</label>
-        <input type="text" class="form-control" name="deskripsi_jabatan" value="<?= $jabatan->deskripsi_jabatan; ?>">
+        <input type="text" class="form-control <?= isset(session('errors')['deskripsi_jabatan']) ? 'is-invalid' : ''; ?>" name="deskripsi_jabatan" value="<?= $jabatan->deskripsi_jabatan; ?>">
+        <div class="invalid-feedback">
+          <?= session('errors.deskripsi_jabatan') ?? ''; ?>
+        </div>
       </div>
       <button type="submit" class="btn btn-dark">Update</button>
     </form>

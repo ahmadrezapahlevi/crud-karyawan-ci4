@@ -17,11 +17,11 @@ class CreateJabatanTable extends Migration
             ],
             'nama_jabatan' => [
                 'type'       => 'VARCHAR',
-                'constraint' => '50',
+                'constraint' => 50,
             ],
             'deskripsi_jabatan' => [
                 'type' => 'VARCHAR',
-                'constraint' => '255',
+                'constraint' => 255,
             ],
         ]);
         $this->forge->addKey('id', true);
