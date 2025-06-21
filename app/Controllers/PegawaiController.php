@@ -88,6 +88,11 @@ class PegawaiController extends BaseController
           }
           
           $this->modelPegawai->save($data);
+          session()->setFlashdata([
+              'swal_icon' => 'success',
+              'swal_title' => 'Sukses!',
+              'swal_text' => 'Data pegawai berhasil ditambahkan.',
+            ]);
           return redirect()->to('pegawai');
     }
     
@@ -127,6 +132,11 @@ class PegawaiController extends BaseController
           }
           
           $this->modelPegawai->save($data);
+          session()->setFlashdata([
+              'swal_icon' => 'success',
+              'swal_title' => 'Sukses!',
+              'swal_text' => 'Data pegawai berhasil diupdate.',
+            ]);
           return redirect()->to('pegawai');
     }
     
@@ -144,6 +154,11 @@ class PegawaiController extends BaseController
           }
           $this->modelPegawai->delete($id);
         }
+        session()->setFlashdata([
+              'swal_icon' => 'success',
+              'swal_title' => 'Sukses!',
+              'swal_text' => 'Data pegawai berhasil dihapus.',
+            ]);
         return redirect()->to('pegawai');
     }
 }
