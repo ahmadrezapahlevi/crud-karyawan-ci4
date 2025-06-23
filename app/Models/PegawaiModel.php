@@ -14,9 +14,14 @@ class PegawaiModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = ['nama_pegawai', 'jabatan_id', 'alamat', 'telepon', 'foto_pegawai'];
     
-    public function getPegawaiWithJabatan(){
+    // public function getPegawaiWithJabatan(){
+    //   return $this->select('pegawai.*, jabatan.nama_jabatan, jabatan.deskripsi_jabatan')
+    //   ->join('jabatan', 'jabatan.id = pegawai.jabatan_id')->findAll();
+    // }
+
+    public function getPegawaiWithJabatan($perPage = 10, $page = 1){
       return $this->select('pegawai.*, jabatan.nama_jabatan, jabatan.deskripsi_jabatan')
-      ->join('jabatan', 'jabatan.id = pegawai.jabatan_id')->findAll();
+      ->join('jabatan', 'jabatan.id = pegawai.jabatan_id')->paginate($perPage, 'default', $page);
     }
     
     public function getPegawaiWithJabatanWhere($id){

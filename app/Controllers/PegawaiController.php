@@ -17,7 +17,14 @@ class PegawaiController extends BaseController
     
     public function index()
     {
-      $data['pegawai'] = $this->modelPegawai->getPegawaiWithJabatan();
+      $perPage = 10; // jumlah data per halaman
+      $page = $this->request->getVar('page') ?? 1; // halaman saat ini, default ke 1
+
+      // ambil data pegawai 
+      // $data['pegawai'] = $this->modelPegawai->paginate($perPage,'default', $page);
+
+      $data['pegawai'] = $this->modelPegawai->getPegawaiWithJabatan($perPage, $page);
+      $data['pager'] = $this->modelPegawai->pager; // untuk pagination
       return view('pegawai/index', $data);
     }
     

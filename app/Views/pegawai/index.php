@@ -16,13 +16,13 @@
           <th>Alamat</th>
           <th>Telepon</th>
           <th>Jabatan</th>
-          <th>Aksi</th>
+          <th width="220">Aksi</th>
         </tr>
       </thead>
       <tbody>
         <?php foreach ($pegawai as $key => $row) { ?>
         <tr>
-          <td><?= $key + 1; ?></td>
+          <td><?= ($pager->getCurrentPage('default') - 1 ) * 10 + $key + 1; ?></td>
           <td><?= $row->nama_pegawai; ?></td>
           <td><?= $row->alamat; ?></td>
           <td><?= $row->telepon; ?></td>
@@ -39,6 +39,9 @@
         <?php } ?>
       </tbody>
     </table>
+    <nav>
+      <?= $pager->links('default', 'bs5'); ?>
+    </nav>
   </div>
 </div>
 <?= $this->endSection(); ?>
