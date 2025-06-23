@@ -2,7 +2,7 @@
 <?= $this->section('content'); ?>
 <?php if (session()->get('login')): ?>
   <div class="alert alert-success">
-    Selamat datang <strong><?= session()->get('nama'); ?></strong>
+    Selamat datang, <?= session()->get('role'); ?>, <strong><?= session()->get('nama'); ?></strong>
   </div>
 <?php endif; ?>
 <div class="p-5 text-center bg-white rounded-3 shadow-sm">

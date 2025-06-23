@@ -27,6 +27,7 @@ class AuthController extends BaseController
                 'username' => $user->username,
                 'nama' => $user->nama,
                 'email' => $user->email,
+                'role' => $user->role,
               ]);
             return redirect()->to('/');
           }

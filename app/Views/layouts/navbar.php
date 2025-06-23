@@ -10,7 +10,9 @@
           <a class="nav-link" href="./">Beranda</a>
         </li>
         <li class="nav-item">
+        <?php if (session()->get('role') == 'admin'): ?>
           <a class="nav-link" href="/jabatan">Jabatan</a>
+        <?php endif; ?>    
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/pegawai">Pegawai</a>

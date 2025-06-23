@@ -4,15 +4,19 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index', ['filter' => 'auth']);
+
+$routes->get('/401', function () {
+    return view('401');
+});
 
 $routes->match(['get', 'post'], '/login', 'AuthController::login');
 $routes->get('/logout', 'AuthController::logout');
 
-$routes->group('', ['filter' => 'auth'], static function ($routes){
+$routes->group('', ['filter' => 'auth'], ['filter' => 'role:admin'], static function ($routes){
   $routes->get('/jabatan', 'JabatanController::index');
   $routes->get('/jabatan/show/(:num)', 'JabatanController::show/$1');
-  $routes->get('/jabatan/create', 'JabatanController::create');
+  $routes->get('/jabatan/create', 'JabatanController::create', ['filter' => 'role:admin']);
   $routes->post('/jabatan/store', 'JabatanController::store');
   $routes->get('/jabatan/edit/(:num)', 'JabatanController::edit/$1');
   $routes->post('/jabatan/update/(:num)', 'JabatanController::update/$1');
